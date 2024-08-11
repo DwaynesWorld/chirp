@@ -1,0 +1,49 @@
+@host = http://localhost:5123
+@id = 23
+
+### Create a new user
+POST {{host}}/users
+Content-Type: application/json
+
+{
+    "id": {{id}},
+    "accountId": {{id}},
+    "reputation": 1200,
+    "displayName": "JohnDoe",
+    "aboutMe": "Software developer with a passion for learning new technologies.",
+    "views": 340,
+    "upVotes": 150,
+    "downVotes": 5,
+    "websiteUrl": "https://johndoe.dev",
+    "location": "New York, USA",
+    "creationDate": "2022-05-14T00:00:00Z",
+    "lastAccessDate": "2023-08-10T00:00:00Z"
+}
+
+### Get all users
+GET {{host}}/users
+
+### Get a user by ID
+GET {{host}}/users/{{id}}
+
+### Update a user
+PUT {{host}}/users/{{id}}
+Content-Type: application/json
+
+{
+    "id": {{id}},
+    "accountId": {{id}},
+    "reputation": 1500,
+    "displayName": "JohnDoeUpdated",
+    "aboutMe": "Updated info about John Doe.",
+    "views": 350,
+    "upVotes": 160,
+    "downVotes": 4,
+    "websiteUrl": "https://johndoeupdated.dev",
+    "location": "San Francisco, USA",
+    "creationDate": "2022-05-14T00:00:00Z",
+    "lastAccessDate": "2023-08-11T00:00:00Z"
+}
+
+### Delete a user by ID
+DELETE {{host}}/users/{{id}}
