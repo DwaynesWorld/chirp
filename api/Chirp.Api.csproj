@@ -3,11 +3,26 @@
     <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Chirp.Api</RootNamespace>
     <Nullable>enable</Nullable>
+    <NuGetAudit>false</NuGetAudit>
+    <NuGetAuditMode>direct</NuGetAuditMode>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
     <PublishAot>true</PublishAot>
   </PropertyGroup>
+
   <ItemGroup>
+    <PackageReference Include="CassandraCSharpDriver" Version="3.20.1" />
     <PackageReference Include="FluentResults" Version="3.16.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.28.0-rc2" />
+    <PackageReference Include="Grpc.Tools" Version="2.40.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.0-preview.7.24405.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="../protos/*.proto" GrpcServices="None" ProtoRoot="../protos" />
   </ItemGroup>
 </Project>

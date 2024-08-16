@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "user.proto";
+
+option csharp_namespace = "Chirp.Api.Protos.Questions";
+
+message Question {
+  repeated string tags = 1;
+  User owner = 2;
+  bool is_answered = 3;
+  uint32 view_count = 4;
+  uint32 favorite_count = 5;
+  uint32 down_vote_count = 6;
+  uint32 up_vote_count = 7;
+  uint32 answer_count = 8;
+  uint32 score = 9;
+  uint32 last_activity_date = 10;
+  uint32 creation_date = 11;
+  uint32 last_edit_date = 12;
+  uint32 question_id = 13;
+  string link = 14;
+  string title = 15;
+  string body = 16;
+}
+
+message CreateQuestionRequest {
+  string title = 1;
+  string body = 2;
+  string tags = 3;
+}

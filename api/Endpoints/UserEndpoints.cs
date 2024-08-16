@@ -1,14 +1,16 @@
+using Chirp.Api.Database;
+using Chirp.Api.Domain;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chirp.Api.Posts;
+namespace Chirp.Api.Endpoints;
 
-public static class PostEndpoints
+public static class UserEndpoints
 {
-    public static RouteGroupBuilder MapPostEndpoints(this RouteGroupBuilder g)
+    public static RouteGroupBuilder MapUserEndpoints(this RouteGroupBuilder g)
     {
         g.MapGet(
             "/",
-            async ([FromServices] IPostRepository r) =>
+            async ([FromServices] IUserRepository r) =>
             {
                 return Results.Ok(await r.GetAll());
             }
@@ -16,18 +18,18 @@ public static class PostEndpoints
 
         g.MapGet(
             "/{id}",
-            async (int id, [FromServices] IPostRepository r) =>
+            async (int id, [FromServices] IUserRepository r) =>
             {
-                var p = await r.GetById(id);
-                return p is not null ? Results.Ok(p) : Results.NotFound();
+                var u = await r.GetById(id);
+                return u is not null ? Results.Ok(u) : Results.NotFound();
             }
         );
 
         g.MapPost(
             "/",
-            async (PostEntity post, [FromServices] IPostRepository r) =>
+            async ([FromBody] User user, [FromServices] IUserRepository r) =>
             {
-                var res = await r.Create(post);
+                var res = await r.Create(user);
 
                 return res.IsSuccess
                     ? Results.Created()
@@ -37,16 +39,16 @@ public static class PostEndpoints
 
         g.MapPut(
             "/{id}",
-            async (int id, PostEntity post, [FromServices] IPostRepository r) =>
+            async (int id, [FromBody] User user, [FromServices] IUserRepository r) =>
             {
-                if (id != post.Id)
+                if (id != user.Id)
                 {
                     return Results.BadRequest(
-                        $"Path parameter id: {id} does not match body parameter post.id:{post.Id}"
+                        $"Path parameter id: {id} does not match body parameter user.id:{user.Id}"
                     );
                 }
 
-                var res = await r.Update(post);
+                var res = await r.Update(user);
 
                 return res.IsSuccess
                     ? Results.Accepted()
@@ -56,7 +58,7 @@ public static class PostEndpoints
 
         g.MapDelete(
             "/{id}",
-            async (int id, [FromServices] IPostRepository r) =>
+            async (int id, [FromServices] IUserRepository r) =>
             {
                 var res = await r.Delete(id);
 

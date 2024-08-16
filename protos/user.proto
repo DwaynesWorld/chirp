@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option csharp_namespace = "Chirp.Api.Protos.User";
+
+message User {
+  uint32 reputation = 1;
+  uint32 user_id = 2;
+  string user_type = 3;
+  uint32 accept_rate = 4;
+  string profile_image = 5;
+  string display_name = 6;
+  string link = 7;
+}
